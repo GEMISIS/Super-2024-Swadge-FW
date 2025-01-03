@@ -25,6 +25,7 @@
 #include "sequencerMode.h"
 #include "soko.h"
 #include "mode_cGrove.h"
+#include "mode_chiliD.h"
 #include "touchTest.h"
 #include "tunernome.h"
 #include "keebTest.h"
@@ -176,6 +177,7 @@ static void mainMenuEnterMode(void)
     addSingleItemToMenu(mainMenu->menu, cGroveMode.modeName);
     addSingleItemToMenu(mainMenu->menu, t48Mode.modeName);
     addSingleItemToMenu(mainMenu->menu, sokoMode.modeName);
+    addSingleItemToMenu(mainMenu->menu, chiliDMode.modeName);
     mainMenu->menu = endSubMenu(mainMenu->menu);
 
     mainMenu->menu = startSubMenu(mainMenu->menu, "Music");
@@ -445,6 +447,10 @@ static void mainMenuCb(const char* label, bool selected, uint32_t settingVal)
         else if (label == bongoTest.modeName)
         {
             switchToSwadgeMode(&bongoTest);
+        }
+        else if (label == chiliDMode.modeName)
+        {
+            switchToSwadgeMode(&chiliDMode);
         }
         else if (label == confirmResetName)
         {
