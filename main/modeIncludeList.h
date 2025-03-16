@@ -43,6 +43,7 @@
 #include "mode_2048.h"
 #include "mode_bigbug.h"
 #include "mode_cGrove.h"
+#include "mode_crypts.h"
 #include "mode_credits.h"
 #include "mode_swadgeHero.h"
 #include "mode_synth.h"
