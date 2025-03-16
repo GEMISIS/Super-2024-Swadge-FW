@@ -16,6 +16,9 @@
 #include "mode_crypts.h"
 #include "esp_log.h"
 
+// Scenes to include
+#include "test_scene.h"
+
 //==============================================================================
 // Defines
 //==============================================================================
@@ -75,17 +78,24 @@ swadgeMode_t cryptCrusadersMode = {
     .fnDacCb                  = NULL,
 };
 
+static scene_t* currentScene = NULL;
+
 static void cryptCrusadersEnterMode(void) {
+    ESP_LOGI("Crypt", "Starting mode");
+    // TODO: Replace test scene with proper start menu scene and context
+    currentScene = &test_scene;
+    // Call the scene start manually only for the first scene.
+    // Future transitions will be handled by the transitionScene function.
+    currentScene->fnSceneStart(NULL);
 }
 
 static void cryptCrusadersExitMode(void) {
+    ESP_LOGI("Crypt", "Ending mode");
+    // Call the scene end manually only for the final scene.
+    // Previous transitions will be handled by the transitionScene function.
+    currentScene->fnSceneEnd(NULL);
 }
 
 static void cryptCrusadersMainLoop(int64_t elapsedUs) {
-    // Process button events
-    buttonEvt_t evt = {0};
-    while (checkButtonQueueWrapper(&evt))
-    {
-    }
-    fillDisplayArea(0, 0, TFT_WIDTH, TFT_HEIGHT, c000);
+    runScene(&currentScene, elapsedUs);
 }
